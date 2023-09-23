@@ -15,6 +15,7 @@ struct CounterFeature: Reducer {
     struct State: Equatable {
         var count = 0
         var fact: String?
+        var error: String?
         var isLoading = false
         var isTimerRunning = false
     }
@@ -43,14 +44,18 @@ struct CounterFeature: Reducer {
         case .incrementButtonTapped:
             state.count += 1
             state.fact = nil
+            state.error = nil
+            state.isTimerRunning = false
             
-            return .none
+            return .cancel(id: CancelID.timer)
             
         case .decrementButtonTapped:
             state.count -= 1
             state.fact = nil
+            state.error = nil
+            state.isTimerRunning = false
             
-            return .none
+            return .cancel(id: CancelID.timer)
             
         case .factButtonTapped:
             state.isLoading = true
@@ -58,7 +63,6 @@ struct CounterFeature: Reducer {
             return .run(priority: .userInitiated) { [count = state.count] send in
                 let fact = try await fetchFactForNumber(count)
                 await send(.factResponse(fact))
-                
             } catch: { error, send in
                 await send(.errorResponse(error))
             }
@@ -74,7 +78,7 @@ struct CounterFeature: Reducer {
             state.fact = error.localizedDescription
             state.isLoading =  false
             
-            return .none
+            return .cancel(id: CancelID.timer)
             
         case .timerTick:
             state.count += 1

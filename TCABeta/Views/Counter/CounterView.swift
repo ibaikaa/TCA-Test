@@ -14,55 +14,50 @@ struct CounterView: View {
     var body: some View {
         WithViewStore(store, observe: { $0 } )  { viewStore in
             VStack {
+                Spacer()
+                
                 PrimaryButton(
                     title: viewStore.isTimerRunning
                     ? "Stop timer"
                     : "Start timer"
                 ) {
-                    viewStore.send(
-                        .toggleTimerButtonTapped,
-                        animation: .default
-                    )
+                    viewStore.send(.toggleTimerButtonTapped)
                 }
                 
                 HStack {
                     Spacer()
                     PrimaryButton(title: "–") {
-                        viewStore.send(
-                            .decrementButtonTapped,
-                            animation: .default
-                        )
+                        viewStore.send(.decrementButtonTapped)
                     }
                     
                     TitleView(title: "\(viewStore.count)")
                     
                     PrimaryButton(title: "+") {
-                        viewStore.send(
-                            .incrementButtonTapped,
-                            animation: .default
-                        )
+                        viewStore.send(.incrementButtonTapped)
                     }
                     
                     Spacer()
                 }
                 
                 PrimaryButton(title: "Fact 💡") {
-                    viewStore.send(
-                        .factButtonTapped,
-                        animation: .default
-                    )
+                    viewStore.send(.factButtonTapped)
                 }
                 .padding(.horizontal)
                 
                 Group {
                     if viewStore.isLoading {
                         ProgressView()
-                    } else if let fact = viewStore.fact {
-                        Text(fact)
-                            .multilineTextAlignment(.center)
+                    } else {
+                        if let fact = viewStore.fact {
+                            Text(fact)
+                                .multilineTextAlignment(.center)
+                        } else {
+                            Color.clear
+                        }
                     }
                 }
-                .padding(.top, 15)
+                .padding(30)
+                .frame(height: UIScreen.main.bounds.height / 3, alignment: .top)
             }
         }
     }

@@ -12,9 +12,14 @@ struct TitleView: View {
     
     var body: some View {
         Text(title)
-            .font(.system(size: 24, weight: .bold))
+            .font(
+                .system(
+                    size: 24,
+                    weight: .bold
+                )
+                .monospacedDigit()
+            )
             .foregroundColor(.black)
             .padding()
-            .monospacedDigit()
     }
 }
