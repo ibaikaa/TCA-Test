@@ -15,18 +15,31 @@ struct AddContactFeature: Reducer {
     }
     
     enum Action: Equatable {
+        enum Delegate: Equatable {
+            case saveContact(Contact)
+        }
+        
+        case delegate(Delegate)
         case cancelButtonTapped
         case saveButtonTapped
         case setName(String)
     }
     
+    @Dependency(\.dismiss) var dismiss
+    
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .cancelButtonTapped:
+        case .delegate:
             return .none
             
+        case .cancelButtonTapped:
+            return .run { _ in await self.dismiss() }
+            
         case .saveButtonTapped:
-            return .none
+            return .run { [contact = state.contact] send in
+                await send(.delegate(.saveContact(contact)))
+                await self.dismiss()
+            }
             
         case .setName(let name):
             state.contact.name = name
