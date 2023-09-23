@@ -39,18 +39,22 @@ struct CounterFeature: Reducer {
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
+            
         case .incrementButtonTapped:
             state.count += 1
             state.fact = nil
+            
             return .none
             
         case .decrementButtonTapped:
             state.count -= 1
             state.fact = nil
+            
             return .none
             
         case .factButtonTapped:
             state.isLoading = true
+            
             return .run(priority: .userInitiated) { [count = state.count] send in
                 let fact = try await fetchFactForNumber(count)
                 await send(.factResponse(fact))
@@ -63,20 +67,29 @@ struct CounterFeature: Reducer {
             state.fact = fact
             state.isLoading = false
             state.isTimerRunning = false
+            
             return .cancel(id: CancelID.timer)
             
         case .errorResponse(let error):
             state.fact = error.localizedDescription
             state.isLoading =  false
+            
+            return .none
+            
+        case .timerTick:
+            state.count += 1
+            state.fact = nil
+            
             return .none
             
         case .toggleTimerButtonTapped:
             state.isTimerRunning.toggle()
             state.fact = nil
+            
             if state.isTimerRunning {
                 return .run { send in
                     while true {
-                        try await Task.sleep(for: .seconds(1))
+                        try await Task.sleep(seconds: 1.0)
                         await send(.timerTick)
                     }
                 } catch: { error, send in
@@ -86,19 +99,12 @@ struct CounterFeature: Reducer {
             } else {
                 return .cancel(id: CancelID.timer)
             }
-            
-        case .timerTick:
-            state.count += 1
-            state.fact = nil
-            return .none
         }
     }
     
     // MARK: Private properties
     
-    private var baseURL: String {
-        "http://numbersapi.com/"
-    }
+    private var baseURL: String { "http://numbersapi.com/" }
     
     // MARK: Private methods
     
@@ -115,4 +121,11 @@ struct CounterFeature: Reducer {
 
 fileprivate enum ApiError: Error {
     case invalidURL
+}
+
+fileprivate extension Task where Success == Never, Failure == Never {
+    static func sleep(seconds: Double) async throws {
+        let duration = UInt64(seconds * 1_000_000_000)
+        try await Task.sleep(nanoseconds: duration)
+    }
 }
