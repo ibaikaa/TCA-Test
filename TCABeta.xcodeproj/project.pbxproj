@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C5953572ABF9EAC00E63540 /* ContactsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5953562ABF9EAC00E63540 /* ContactsFeature.swift */; };
+		8C5953592ABF9F3800E63540 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5953582ABF9F3800E63540 /* ContactsView.swift */; };
+		8C59535B2ABFA0BD00E63540 /* AddContactFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C59535A2ABFA0BD00E63540 /* AddContactFeature.swift */; };
+		8C59535E2ABFA15A00E63540 /* AddContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C59535D2ABFA15A00E63540 /* AddContactView.swift */; };
 		8CCC78D32ABF4D6200BC227A /* TCABetaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC78D22ABF4D6200BC227A /* TCABetaApp.swift */; };
 		8CCC78D52ABF4D6200BC227A /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCC78D42ABF4D6200BC227A /* CounterView.swift */; };
 		8CCC78D72ABF4D6500BC227A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CCC78D62ABF4D6500BC227A /* Assets.xcassets */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C5953562ABF9EAC00E63540 /* ContactsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsFeature.swift; sourceTree = "<group>"; };
+		8C5953582ABF9F3800E63540 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		8C59535A2ABFA0BD00E63540 /* AddContactFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactFeature.swift; sourceTree = "<group>"; };
+		8C59535D2ABFA15A00E63540 /* AddContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactView.swift; sourceTree = "<group>"; };
 		8CCC78CF2ABF4D6200BC227A /* TCABeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCABeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCC78D22ABF4D6200BC227A /* TCABetaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCABetaApp.swift; sourceTree = "<group>"; };
 		8CCC78D42ABF4D6200BC227A /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
@@ -41,6 +49,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C5953542ABF9E9300E63540 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8C5953552ABF9E9500E63540 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				8C59535C2ABFA15000E63540 /* AddContact */,
+				8C5953562ABF9EAC00E63540 /* ContactsFeature.swift */,
+				8C5953582ABF9F3800E63540 /* ContactsView.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		8C59535C2ABFA15000E63540 /* AddContact */ = {
+			isa = PBXGroup;
+			children = (
+				8C59535A2ABFA0BD00E63540 /* AddContactFeature.swift */,
+				8C59535D2ABFA15A00E63540 /* AddContactView.swift */,
+			);
+			path = AddContact;
+			sourceTree = "<group>";
+		};
 		8CCC78C62ABF4D6200BC227A = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +114,8 @@
 		8CF9017B2ABF7F59001F3A54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8C5953552ABF9E9500E63540 /* Contacts */,
+				8C5953542ABF9E9300E63540 /* Main */,
 				8CF901822ABF8835001F3A54 /* Counter */,
 			);
 			path = Views;
@@ -183,8 +219,12 @@
 				8CCC78D52ABF4D6200BC227A /* CounterView.swift in Sources */,
 				8CCC78D32ABF4D6200BC227A /* TCABetaApp.swift in Sources */,
 				8CF9017D2ABF7FB6001F3A54 /* PrimaryButton.swift in Sources */,
+				8C59535B2ABFA0BD00E63540 /* AddContactFeature.swift in Sources */,
 				8CF9017A2ABF6FD0001F3A54 /* CounterFeature.swift in Sources */,
 				8CF901802ABF8025001F3A54 /* TitleView.swift in Sources */,
+				8C59535E2ABFA15A00E63540 /* AddContactView.swift in Sources */,
+				8C5953572ABF9EAC00E63540 /* ContactsFeature.swift in Sources */,
+				8C5953592ABF9F3800E63540 /* ContactsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

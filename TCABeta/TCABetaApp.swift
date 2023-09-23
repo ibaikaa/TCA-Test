@@ -10,14 +10,23 @@ import ComposableArchitecture
 
 @main
 struct TCABetaApp: App {
-    @State var store = Store(initialState: CounterFeature.State()) {
-        CounterFeature()
+    @State var store = Store(
+        initialState: ContactsFeature.State(
+            contacts: [
+                Contact(id: UUID(), name: "John"),
+                Contact(id: UUID(), name: "Aibek"),
+                Contact(id: UUID(), name: "Vasya"),
+                Contact(id: UUID(), name: "Ivan")
+            ]
+        )
+    ) {
+        ContactsFeature()
             ._printChanges()
     }
     
     var body: some Scene {
         WindowGroup {
-            CounterView(store: store)
+            ContactsView(store: store)
         }
     }
 }
